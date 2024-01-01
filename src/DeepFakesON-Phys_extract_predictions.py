@@ -163,7 +163,7 @@ for i in tqdm(range(len(predictions))):
         # predictions[i]='1'
     fichero_scores.write(";%s" % predictions[i]) #scores predichas
     fichero_scores.write(";%s" % preds[i]) #scores predichas
-    fichero_scores.write(";%s" % test_labels[i]) #scores predichas
+    fichero_scores.write(";%s\n" % test_labels[i]) #scores predichas
 
 
 print("RESULTS")
