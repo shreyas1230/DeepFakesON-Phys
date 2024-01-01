@@ -152,7 +152,7 @@ preds = (predictions > 0.5).astype(int)
 # raise Exception
 
 bufsize = 1
-nombre_fichero_scores = 'deepfake_scores.txt'
+nombre_fichero_scores = '../../data/deepfake_scores.txt'
 fichero_scores = open(nombre_fichero_scores,'w',buffering=bufsize)
 fichero_scores.write("img;score\n")
 for i in tqdm(range(len(predictions))):
