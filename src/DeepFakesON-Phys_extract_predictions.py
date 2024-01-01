@@ -106,7 +106,7 @@ def load_test_attention(carpeta):
 
 # np.set_printoptions(threshold=np.inf)
 # data = []
-batch_size = 128
+batch_size = 512
 model = load_model('../pretrained models/DeepFakesON-Phys_CelebDF_V2.h5')
 
 print(model.summary())
@@ -145,11 +145,11 @@ for i in tqdm(range(0, len(test_data), batch_size)):
     ex = i+batch_size if i+batch_size < len(test_data) else len(test_data)
     predictions.extend(model([test_data[i:ex], test_data2[i:ex]]))
 predictions = np.array([i.numpy()[0] for i in predictions])
+preds = (predictions > 0.5).astype(int)
 # predictions = model.predict([test_data[:2], test_data2[:2]], batch_size=batch_size, verbose=1)
 
 # embed()
 # raise Exception
-print(np.sum(test_labels == predictions) / len(test_labels))
 
 bufsize = 1
 nombre_fichero_scores = 'deepfake_scores.txt'
@@ -162,4 +162,9 @@ for i in tqdm(range(len(predictions))):
     # elif float(predictions[i])>1:
         # predictions[i]='1'
     fichero_scores.write(";%s\n" % predictions[i]) #scores predichas
+    fichero_scores.write(";%s\n" % preds[i]) #scores predichas
     fichero_scores.write(";%s\n" % test_labels[i]) #scores predichas
+
+
+print("Accuracy:", np.sum(test_labels == preds) / len(test_labels))
+print("Min prediction value:", np.min(predictions), "Max prediction value:", np.max(predictions))
