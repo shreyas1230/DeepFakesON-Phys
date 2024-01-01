@@ -154,16 +154,16 @@ preds = (predictions > 0.5).astype(int)
 bufsize = 1
 nombre_fichero_scores = '../../data/deepfake_scores.txt'
 fichero_scores = open(nombre_fichero_scores,'w',buffering=bufsize)
-fichero_scores.write("img;score\n")
+fichero_scores.write("vid;frame;probability;pred;label\n")
 for i in tqdm(range(len(predictions))):
     fichero_scores.write("%s" % images_names[i]) #fichero
     # if float(predictions[i])<0:
         # predictions[i]='0'
     # elif float(predictions[i])>1:
         # predictions[i]='1'
-    fichero_scores.write(";%s\n" % predictions[i]) #scores predichas
-    fichero_scores.write(";%s\n" % preds[i]) #scores predichas
-    fichero_scores.write(";%s\n" % test_labels[i]) #scores predichas
+    fichero_scores.write(";%s" % predictions[i]) #scores predichas
+    fichero_scores.write(";%s" % preds[i]) #scores predichas
+    fichero_scores.write(";%s" % test_labels[i]) #scores predichas
 
 
 print("RESULTS")
