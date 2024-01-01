@@ -166,5 +166,7 @@ for i in tqdm(range(len(predictions))):
     fichero_scores.write(";%s\n" % test_labels[i]) #scores predichas
 
 
+print("RESULTS")
+print("---------------------")
 print("Accuracy:", np.sum(test_labels == preds) / len(test_labels))
 print("Min prediction value:", np.min(predictions), "Max prediction value:", np.max(predictions))
